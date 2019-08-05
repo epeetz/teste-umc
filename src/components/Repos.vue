@@ -40,16 +40,10 @@ import axios from 'axios';
 
 export default {
 	name: 'Repos',
-	components: {
-
-	},
 	data() {
 		return {
 			infos: null
 		}
-	},
-	methods: {
-
 	},
 	mounted() {
 		axios.get('https://api.github.com/users/epeetz/repos')
