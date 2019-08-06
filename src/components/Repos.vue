@@ -1,32 +1,39 @@
 <template>
-	<b-container fluid>
-		<h1>Repositories of {{user}}</h1>
-		<b-row>
-			<b-table striped hover responsive :items="infos" :fields="fields">
-				<template slot="index" slot-scope="infos">{{ infos.index + 1 }}</template>
-				<template slot="full_name" slot-scope="infos"><strong>{{ infos.item.full_name }}</strong></template>
-				<template slot="url" slot-scope="infos">{{ infos.item.url }}</template>
-				<template slot="created_at" slot-scope="infos">{{ infos.item.created_at | formatDate }}</template>
-			</b-table>
-		</b-row>
-	</b-container>
+	<div class="container mb-3">
+		<div class="d-flex mb-3">
+			<div class="mr-auto">
+				<h3>Repositories by {{ reformattedSearchString }}</h3>
+			</div>
+		</div>
+		<div class="card-columns">
+			<div class="card" v-bind:key="repo.id" v-for="repo in repos">
+				<div>
+					<div class="card-body">
+						<h5 class="card-title">
+							<a
+							:href="repo.html_url"
+							class="card-link"
+							target="_blank">{{ repo.name }}</a>
+						</h5>
+						<h6 class="card-subtitle mb-2 text-muted" >{{ repo.created_at | formatDate }}</h6>
+						<p class="card-text">{{ repo.description }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
 	name: 'Repos',
-	data() {
-		return {
-			fields: ['index', 'full_name', 'url', 'created_at'],
-			infos: null,
-			user: null
-		}
-	},
-	mounted() {
-		axios.get('https://api.github.com/users/epeetz/repos')
-		.then(response => (this.infos = response.data,this.user = response.data[0].owner.login))
-	},
-}
+	props: ['repos','reformattedSearchString']
+};
 </script>
+
+<style scoped>
+button:focus {
+	box-shadow: none !important;
+}
+</style>

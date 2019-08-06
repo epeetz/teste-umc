@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for Repos.vue</title>
+    <title>Code coverage report for SearchForm.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="index.html">All files</a> Repos.vue
+      <a href="index.html">All files</a> SearchForm.vue
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>2/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>6/6</span>
       </div>
     </div>
     <p class="quiet">
@@ -89,7 +89,15 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -114,13 +122,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,47 +149,55 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-	&lt;div class="container mb-3"&gt;
-		&lt;div class="d-flex mb-3"&gt;
-			&lt;div class="mr-auto"&gt;
-				&lt;h3&gt;Repositories by {{ reformattedSearchString }}&lt;/h3&gt;
-			&lt;/div&gt;
-		&lt;/div&gt;
-		&lt;div class="card-columns"&gt;
-			&lt;div class="card" v-bind:key="repo.id" v-for="repo in repos"&gt;
-				&lt;div&gt;
-					&lt;div class="card-body"&gt;
-						&lt;h5 class="card-title"&gt;
-							&lt;a
-							:href="repo.html_url"
-							class="card-link"
-							target="_blank"&gt;{{ repo.name }}&lt;/a&gt;
-						&lt;/h5&gt;
-						&lt;h6 class="card-subtitle mb-2 text-muted" &gt;{{ repo.created_at | formatDate }}&lt;/h6&gt;
-						&lt;p class="card-text"&gt;{{ repo.description }}&lt;/p&gt;
-					&lt;/div&gt;
+	&lt;div class="container"&gt;
+		&lt;form class="mb-5"&gt;
+			&lt;div class="input-group"&gt;
+				&lt;input
+					v-model="searchString"
+					@keydown.13.prevent="parseSearchString"
+					type="text"
+					class="form-control"
+					placeholder="Search ..."
+				&gt;
+				&lt;div class="input-group-append"&gt;
+					&lt;button @click="parseSearchString" class="btn btn-outline-secondary" type="button"&gt;
+						&lt;i class="fas fa-search"&gt;&lt;/i&gt;
+					&lt;/button&gt;
 				&lt;/div&gt;
 			&lt;/div&gt;
-		&lt;/div&gt;
+		&lt;/form&gt;
 	&lt;/div&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script&gt;
-&nbsp;
 export default {
-	name: 'Repos',
+	name: 'SearchForm',
 	data() {
 		return {
-			title: 'Search Results'
+			searchString: ''
 		};
 	},
-	props: ['repos','reformattedSearchString']
+	methods: {
+		parseSearchString() {
+			const trimmedSearchString = this.searchString.trim();
+<span class="missing-if-branch" title="else path not taken" >E</span>			if (trimmedSearchString !== '') {
+				const searchParams = trimmedSearchString.split(/\s+/);
+				this.$emit('search', searchParams);
+				this.searchString = '';
+			}
+		}
+	}
 };
 &lt;/script&gt;
 &nbsp;
 &lt;style scoped&gt;
-button:focus {
+input,
+button {
 	box-shadow: none !important;
+}
+&nbsp;
+.form-control {
+	border-color: #6c757d;
 }
 &lt;/style&gt;</pre></td></tr>
 </table></pre>
