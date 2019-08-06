@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Header from './Header';
+import Header from '../components/Header';
 
 let wrapper;
 

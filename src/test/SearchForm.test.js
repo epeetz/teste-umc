@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import SearchForm from './SearchForm';
+import SearchForm from '../components/SearchForm';
 
 let wrapper;
 

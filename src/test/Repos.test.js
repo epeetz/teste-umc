@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Repos from './Repos';
+import Repos from '../components/Repos';
 
 let wrapper;
 

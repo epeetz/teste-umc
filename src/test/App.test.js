@@ -1,8 +1,8 @@
 import { shallowMount } from '@vue/test-utils';
-import App from './App';
-import Header from './components/Header';
-import SearchForm from './components/SearchForm';
-import Repos from './components/Repos';
+import App from '../App';
+import Header from '../components/Header';
+import SearchForm from '../components/SearchForm';
+import Repos from '../components/Repos';
 
 let wrapper;
 
